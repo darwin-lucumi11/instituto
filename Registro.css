@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(instituto_imagen.jpg);
+  background-size: cover; 
+  background-attachment: fixed;
+  
+  
+}
+
+/* Contenedor principal */
+main {
+  padding: 3rem;
+  border-radius: 15px;
+  background: linear-gradient(180deg, rgba(58, 66, 86, 0.8), rgba(54, 60, 74, 0.6)); color: #fff;
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+  
+}
+
+/* Inputs */
+form label {
+  display: flex;
+  align-items: center;
+  background: #1f2937;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  border: 1px solid #374151;
+  
+  
+}
+
+form label i {
+  margin-right: 10px;
+  color: #22d3ee;
+}
+
+form input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  font-size: 1rem;
+}
+ input.error-input {
+      border: 1px solid #ff4d4d;
+      background-color: #ffeaea;
+    }
+
+/* Botón */
+button {
+  width: 100%;
+  padding: 0.8rem;
+  background: #352f9a;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #4338ca;
+}
+
+/* Links */
+a {
+  display: block;
+  margin-top: 0.8rem;
+  color: #ebf1f1;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  margin-top: 2rem;
+  text-align: center;
+  color: #f9fafb;
+}
+.estado {
+  font-size: 14px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.estado.ok {
+  color: #06b627;
+}
+
+.estado.error {
+  color: #e91313;
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 18px;
+  background: #333;
+  color: #fff;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s ease;
+  z-index: 1000;
+}
+
+.toast.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+footer h3 {
+  font-size: 0.85rem;
+  font-weight: normal;
+}
+@media(min-width:901px){ .menu-btn{display:none;} }

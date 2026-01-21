@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Registro.css">
+  <script src="https://kit.fontawesome.com/4b1c2fbb3a.js" crossorigin="anonymous"></script>
+  <title>Instituto San Felipe - Registro</title>
+</head>
+
+<body>
+  <main>
+    <h2 class="titulo">
+      <i class="fa-solid fa-user-plus"></i> Registro de Usuario <br>
+    </h2>
+
+<form id="registroForm">
+
+  <!-- Nombre -->
+  <label>
+    <i class="fa-solid fa-id-card"></i>
+    <input type="text" placeholder="Nombre completo" id="nombre" name="nombre" required>
+  </label>
+  <span class="error" id="nombreError"></span>
+
+  <!-- Usuario -->
+  <label>
+    <i class="fa-solid fa-user"></i>
+    <input type="text" placeholder="Usuario" id="usuario" name="usuario" required>
+    <span id="estadoUsuario" class="estado"></span>
+
+  </label>
+  <span class="error" id="usuarioError"></span>
+
+  <!-- Contraseña -->
+  <label>
+    <i class="fa-solid fa-lock"></i>
+    <input type="password" placeholder="Contraseña" id="contrasena" name="contrasena" required>
+  </label>
+  <span class="error" id="contrasenaError"></span>
+
+  <!-- Confirmar -->
+  <label>
+    <i class="fa-solid fa-lock"></i>
+    <input type="password" placeholder="Confirmar contraseña" id="confirmar" name="confirmar" required>
+  </label>
+  <span class="error" id="confirmarError"></span>
+
+  <!-- Rol -->
+  <label>
+    <i class="fa-solid fa-user-gear"></i>
+    <select id="rol" name="rol" required>
+      <option value="">Seleccionar rol</option>
+      <option value="admin">Administrador</option>
+      <option value="docente">Docente</option>
+      <option value="secretaria">Secretaria</option>
+    </select>
+  </label>
+  <span class="error" id="rolError"></span>
+
+  <button type="submit" id="button"><b>Registrarse</b></button>
+
+  <p id="successMessage"></p>
+  <p id="errorMessage"></p>
+
+  <a href="login.php" class="link"><b>¿Ya tienes cuenta? Inicia sesión</b></a>
+</form>
+
+  </main>
+
+  <footer>
+    <h3>© 2025 DARWIN LUCUMI</h3>
+  </footer>
+
+ <script src="app.js"></script>
+
+</body>
+</html>

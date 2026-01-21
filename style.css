@@ -1,0 +1,301 @@
+:root{
+      --bg: #0f172a;        
+      --card: #111827;      
+      --muted:#94a3b8;      
+      --text:#e2e8f0;       
+      --brand:#4f46e5;      
+      --brand-2:#22d3ee;    
+      --ok:#16a34a;         
+      --warn:#eab308;    
+      --err:#ef4444;        
+      --border:#1f2937;     
+      --shadow: 0 10px 30px rgba(53, 28, 28, 0.25);
+      --radius: 14px;
+      
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+    margin: 0; background-image: url(instituto_imagen.jpg);background-size: cover;    background-position: center;  background-repeat: no-repeat;   background-attachment: fixed; 
+   
+  color: var(--text);
+  font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+  letter-spacing: .2px;
+    }
+       
+    a{color:inherit; text-decoration:none}
+    .app{display:grid; grid-template-columns: 280px 1fr; min-height:100dvh}
+    
+   .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 290px;          /* ancho fijo */
+    height: 100vh;
+
+    padding: 20px;
+    border-right: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(44, 65, 111, 0.7), rgba(17,24,39,.5));
+    backdrop-filter: blur(6px);
+
+    z-index: 50; /* sidebar encima del fondo pero debajo del header */
+  }
+
+    main{
+      margin-left: 0px;
+
+    }
+    .logo{
+      display:flex; align-items:center; gap:12px; padding:16px; border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(79,70,229,.18), rgba(34,211,238,.12));
+      box-shadow: var(--shadow);
+      
+    }
+    .logo-badge{
+      width:38px; height:38px; border-radius:12px; display:grid; place-items:center;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      font-weight:700;
+      box-shadow: 0 10px 25px rgba(79,70,229,.35);
+    }
+    .sidebar nav{margin-top:18px; display:grid; gap:6px}
+    .nav-item{
+      display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:12px; color:#cbd5e1;
+      border:1px solid transparent;
+    }
+    .nav-item:hover{background: rgba(148,163,184,.08); border-color: rgba(148,163,184,.18)}
+    .nav-item[aria-current="page"]{
+      background: linear-gradient(135deg, rgba(79,70,229,.18), rgba(34,211,238,.12));
+      border-color: rgba(79,70,229,.35);
+      color:#eef2ff;
+    }
+    .kpi{
+      margin-top:18px; padding:14px; border:1px dashed rgba(151, 153, 158, 0.25); border-radius:12px; color:#0622f0;
+      background: rgba(1, 5, 18, 0.06);
+    }
+    /* Main */
+    header{
+      display:flex; align-items:center; gap:16px; padding:18px 22px;
+      position:sticky; top:0; background: linear-gradient(180deg, rgba(15,23,42,.8), rgba(15,23,42,.6));
+      backdrop-filter: blur(6px); border-bottom:1px solid var(--border); z-index:5;
+    }
+    .search{
+      flex:1; display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px;
+      background:#0b1223; border:1px solid #1d283a;
+    }
+    .search input{flex:1; background:transparent; border:0; color:var(--text); outline:none}
+    .userbar{display:flex; align-items:center; gap:10px}
+    .btn{
+      border:1px solid #263142; background:#0b1223; color:#dbeafe; padding:10px 12px; border-radius:12px; cursor:pointer;
+    }
+    .btn.primary{background: linear-gradient(135deg, var(--brand), var(--brand-2)); color:#0b1223; border:0; font-weight:700}
+    .btn.ok{background: rgba(22,163,74,.18); border-color:rgba(22,163,74,.35)}
+    .btn.warn{background: rgba(234,179,8,.15); border-color:rgba(234,179,8,.35)}
+    .btn.err{background: rgba(239,68,68,.15); border-color:rgba(239,68,68,.35)}
+    .content{padding:24px; display:grid; gap:18px}
+    .grid{display:grid; gap:18px}
+    @media(min-width:900px){ .grid.cols-2{grid-template-columns:1fr 1fr} .grid.cols-3{grid-template-columns:repeat(3,1fr)} }
+    .card{
+      background: linear-gradient(180deg, rgba(17,24,39,.7), rgba(17,24,39,.55));
+      border:1px solid var(--border); border-radius: var(--radius); padding:18px; box-shadow: var(--shadow);
+    }
+    .card h2{margin:0 0 12px 0; font-size:20px}
+    .muted{color:var(--muted)}
+    .kpi-row{display: flex;flex-wrap: wrap;gap: 10px;align-items: center;
+
+   /* 🔑 FIX */
+   overflow: visible;
+   line-height: normal;}
+
+    .pill{display:inline-flex;
+    align-items:center;
+    gap:8px; 
+    padding:6px 10px; 
+    border-radius:999px; 
+    border:1px 
+    solid #1f2a3c; 
+    background:#0b1223;  
+    border: 1px solid #1f2a3c;
+    color:#c7d2fe; 
+    font-size:12px}
+    /* Table */
+    .table{width:100%; border-collapse: collapse; font-size:14px}
+    .table th, .table td{padding:10px 12px; border-bottom:1px solid #1f2937}
+    .table th{ text-align:left; color:#93c5fd; font-weight:600}
+    .row-actions{display:flex; gap:8px}
+    /* Modal */
+    .modal{
+       position:fixed;  display:none; place-items:center; background: rgba(39, 42, 57, 0.6); z-index:50; border: 1px solid black; border-radius: 9px; color:white; 
+    }
+    .modal[open]{display:grid}
+    .modal .panel{width:min(640px, 92vw); background:fixed; border-radius:16px; box-shadow:0 6px 16px (0,0,0,0.5)}
+    .panel header{position:unset; border:0; background:transparent; padding:16px 18px}
+    .panel .body{padding:0 18px 18px}
+    .form{display:grid; gap:12px}
+    .form .row{display:grid; gap:8px}
+    @media(min-width:700px){ .form.two{grid-template-columns:1fr 1fr; gap:12px}}
+    .input, select, textarea{
+      width:100%; padding:10px 12px; border-radius:10px; border:1px solid #243044; background:#0a1529; color:#e5e7eb
+    }
+    .helper{font-size:12px; color:#d2d8e0}
+    /* Toast */
+    .toast{position:fixed; right: 20px; bottom:20px; display:none; padding:12px 14px; border-radius:12px; background:#052e1b; color:#bbf7d0; border:1px solid rgba(34,197,94,.35); box-shadow: var(--shadow); z-index:60}
+    .toast[show]{display:block}
+    /* Hide sections */
+    section[show]{display:none !important}
+
+
+/* Responsive */
+@media(max-width:900px){
+      .app{grid-template-columns: 1fr}
+      .sidebar{position:fixed; inset:0 30% 0 0; transform: translateX(-100%); transition:.25s; z-index:60}
+      .sidebar[open]{transform: translateX(0)}
+      .backdrop{position:fixed; inset:0; background:rgba(2,6,23,.55); backdrop-filter: blur(2px); display:none}
+      .backdrop[show]{display:block}
+      .menu-btn{display:inline-flex}
+    } 
+    @media(min-width:901px){ .menu-btn{display:none;} }
+    
+.card {
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+}
+section {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp .5s ease forwards;
+}
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.sidebar {
+  animation: sidebarFade .6s ease;
+  
+}
+@keyframes sidebarFade {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.nav-item {
+  transition: background .25s, transform .2s;
+}
+.nav-item:hover {
+  transform: translateX(6px);
+}
+.btn {
+  transition: transform .2s ease;
+}
+.btn:hover {
+  transform: scale(1.04);
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.modal[open] .panel {
+  animation: modalPop .35s ease;
+}
+@keyframes modalPop {
+  0% { opacity: 0; transform: scale(.85) translateY(20px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Animación base */
+#newStudentBtn {
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+/* Efecto al pasar el cursor */
+#newStudentBtn:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 0 18px rgba(79, 70, 229, 0.45);
+}
+
+/* Efecto al presionarlo */
+#newStudentBtn:active {
+  transform: scale(0.96);
+}
+
+/* Brillo animado interno */
+#newStudentBtn::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 250%;
+  height: 250%;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,0.35) 0%,
+    rgba(255,255,255,0) 60%
+  );
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity .4s ease, transform .5s ease;
+}
+
+/* Brillo visible al hover */
+#newStudentBtn:hover::after {
+  opacity: .7;
+  transform: scale(1);
+}
+
+/* Animación flotante */
+@keyframes floatPulse {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
+}
+
+/* Hace que flote cada 4 segundos suavemente */
+#newStudentBtn {
+  animation: floatPulse 4s ease-in-out infinite;
+}
+.estado-badge {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.estado-badge {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.estado-pagado {
+  background: rgba(43, 221, 96, 0.15); border-color:rgba(17, 210, 59, 0.35);
+  font-size:  15px;
+ 
+}
+
+.estado-pendiente {
+  background: rgba(218, 65, 65, 0.15); border-color:rgba(213, 119, 119, 0.35);
+  font-size:  15px;
+}
+.delete-btn {
+ background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+ cursor: pointer;
+}
+
+
+
+
+

@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instituto</title>
+  <link rel="stylesheet" href="style.css">
+ 
+</head>
+<body>
+  
+  <div class="app" id="app">
+    <aside class="sidebar" id="sidebar" aria-label="Barra lateral de navegación">
+      <div class="logo" aria-label="SIGI Instituto">
+        
+        <div>
+          <strong>SIGI</strong><br>
+          <span class="muted"> Instituto San felipe</span>
+          <button class="btn ok" id="logoutBtn">🚪 Cerrar sesión</button> 
+          
+
+          
+        </div>
+      </div>
+      <nav role="navigation" aria-label="Módulos">
+        <a class="nav-item" href="#dashboard" data-route>🏠 Panel</a>
+        <a class="nav-item" href="#estudiantes" data-route>👩‍🎓 Estudiantes</a>
+        <a class="nav-item" href="#cursos" data-route>📚 Cursos</a>
+        <a class="nav-item" href="#solicitudes" data-route>📝 Solicitudes</a>
+        <a class="nav-item" href="#citas" data-route>📅 Citas</a>
+        <a class="nav-item" href="#reportes" data-route>📊 Reportes</a>
+        <a class="nav-item" href="#notificaciones" data-route>🔔 Notificaciones</a>
+        <a class="nav-item" href="#pagos" data-route>💰 Pagos</a>
+        <a class="nav-item" href="#seguridad" data-route>🔐 Seguridad</a>
+      </nav>
+
+      <div class="kpi" aria-live="polite">
+        <div><strong>Estado:</strong> Operativo</div>
+        <div class="muted">Último despliegue: hoy</div>
+      </div>
+    </aside>
+    <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+
+    <main>
+      <header>
+        <button class="btn menu-btn" id="openMenu" aria-controls="sidebar" aria-expanded="false">☰</button>
+        <div class="search" role="search">
+          🔎 <input id="globalSearch" type="search" placeholder="Buscar en estudiantes, cursos, solicitudes…" aria-label="Buscar">
+        </div>
+        <div class="userbar">
+          
+          <button class="btn primary" id="newStudentBtn">➕ Estudiante</button>
+        </div>
+      </header>
+
+      <div class="content" id="content" tabindex="-1">
+    
+        <section id="dashboard" aria-labelledby="dash-title">
+          <div class="grid cols-3">
+            <div class="card">
+              <h2 id="dash-title">Panel</h2>
+              <p class="muted">Resumen rápido del instituto.</p>
+              <div class="kpi-row">
+                <div class="pill">👩‍🎓 Estudiantes: <b id="kpiStudents">0</b></div>
+                <div class="pill">📚 Cursos: <b id="kpiCourses">0</b></div>
+                <div class="pill">📝 Solicitudes: <b id="kpiReqs">0</b></div>
+                <div class="pill">📅 Citas hoy: <b id="kpiAppts">0</b></div>
+              </div>
+            </div>
+            <div class="card">
+              <h2>Actividad reciente</h2>
+              <ul id="activity" class="muted" style="margin:0; padding-left:18px">
+                <li>Se creó el prototipo SIGI.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h2>Atajos</h2>
+              <div style="display:flex; gap:10px; flex-wrap:wrap">
+                <a class="btn ok" href="#estudiantes" data-route>Gestionar estudiantes</a>
+                <a class="btn warn" href="#cursos" data-route>Registrar curso</a>
+                <a class="btn" href="#solicitudes" data-route>Ver solicitudes</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ESTUDIANTES -->
+        <section id="estudiantes" hidden aria-labelledby="students-title">
+          <div class="card">
+            <h2 id="students-title">Estudiantes</h2>
+            <div style="display:flex; gap:10px; align-items:center; margin:6px 0 12px">
+              <input class="input" id="studentFilter" placeholder="Filtrar por nombre o documento" aria-label="Filtrar estudiantes">
+              <button class="btn" id="exportCSV">⬇️ Exportar CSV</button>
+            </div>
+            <div class="card" style="padding:0">
+              <table class="table" aria-describedby="students-title">
+                <thead>
+                  <tr>
+                    <th>Documento</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Curso</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="studentTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- CURSOS -->
+        <section id="cursos" hidden aria-labelledby="courses-title">
+          <div class="card">
+            <h2 id="courses-title">Cursos</h2>
+            <form class="form two" id="courseForm" novalidate>
+              <div class="row">
+                <label>Código
+                  <input class="input" name="code" required minlength="2" maxlength="12" />
+                </label>
+                <span class="helper"> </span>
+              </div>
+              <div class="row">
+                <label>Nombre del curso
+                  <input class="input" name="name" required minlength="3" />
+                </label>
+              </div>
+              <div class="row" style="grid-column: 1 / -1; display:flex; gap:10px; justify-content:flex-end">
+                <button class="btn" type="reset">Limpiar</button>
+                <button class="btn primary" type="submit">Guardar curso</button>
+              </div>
+            </form>
+          </div>
+          <div class="card">
+            <h2>Listado</h2>
+            <ul id="courseList" class="muted" style="margin:0; padding-left:18px"></ul>
+          </div>
+        </section>
+
+        <section id="solicitudes" hidden aria-labelledby="req-title">
+          <div class="card">
+            <h2 id="req-title">Solicitudes estudiantiles</h2>
+            <form class="form two" id="requestForm" novalidate>
+              <div class="row">
+                <label>Documento estudiante
+                  <input class="input" name="doc" required />
+                </label>
+              </div>
+              <div class="row">
+                <label>Tipo de solicitud
+                  <select name="type">
+                    <option>Certificado</option>
+                    <option>Constancia</option>
+                    <option>Cambio de grupo</option>
+                  </select>
+                </label>
+              </div>
+              <div class="row" style="grid-column:1 / -1">
+                <label>Detalle
+                  <textarea class="input" name="detail" rows="3" placeholder="Describe tu solicitud…"></textarea>
+                </label>
+              </div>
+              <div class="row" style="grid-column:1 / -1; display:flex; gap:10px; justify-content:flex-end">
+                <button class="btn" type="reset">Limpiar</button>
+                <button class="btn primary" type="submit">Registrar</button>
+              </div>
+            </form>
+          </div>
+          <div class="card">
+            <h2>Bandeja</h2>
+            <div id="reqList" class="grid"></div>
+          </div>
+        </section>
+
+        <!-- CITAS -->
+        <section id="citas" hidden aria-labelledby="appt-title">
+          <div class="card">
+            <h2 id="appt-title">Citas administrativas</h2>
+            <form class="form two" id="apptForm" novalidate>
+              <div class="row">
+                <label>Documento estudiante
+                  <input class="input" name="doc" required />
+                </label>
+              </div>
+              <div class="row">
+                <label>Fecha y hora
+                  <input class="input" type="datetime-local" name="when" required />
+                </label>
+              </div>
+              <div class="row" style="grid-column:1 / -1; display:flex; gap:10px; justify-content:flex-end">
+                <button class="btn" type="reset">Limpiar</button>
+                <button class="btn primary" type="submit">Agendar</button>
+              </div>
+            </form>
+          </div>
+          <div class="card">
+            <h2>Agenda</h2>
+            <ul id="apptList" class="muted" style="margin:0; padding-left:18px"></ul>
+          </div>
+        </section>
+
+        <!-- REPORTES -->
+        <section id="reportes" hidden aria-labelledby="rep-title">
+          <div class="card">
+            <h2 id="rep-title">Reportes y estadísticas</h2>
+            <p class="muted">Demostración simple (sin librerías externas):</p>
+            <canvas id="miniChart" width="640" height="220" aria-label="Gráfico de barras de ejemplo" role="img"></canvas>
+          </div>
+        </section>
+
+        <!-- NOTIFICACIONES -->
+        <section id="notificaciones" hidden aria-labelledby="noti-title">
+          <div class="card">
+            <h2 id="noti-title">Notificaciones</h2>
+            <form class="form two" id="notifyForm" novalidate>
+              <div class="row">
+                <label>Destino
+                  <select name="to">
+                    <option value="all">Todos los estudiantes</option>
+                    <option value="course">Por curso</option>
+                    <option value="one">Un estudiante</option>
+                    <label>Estudiante
+                    <input class="input" name="student" placeholder="ID o nombre del estudiante" />
+                    </label>
+                    <div class="row" id="row-student" hidden></div>
+                  </select>
+                </label>
+              </div>
+              <div class="row">
+                <label>Asunto
+                  <input class="input" name="subject" required />
+                </label>
+              </div>
+              <div class="row" style="grid-column:1 / -1">
+                <label>Mensaje
+                  <textarea class="input" name="body" rows="3" required placeholder="Escribe el mensaje…"></textarea>
+                </label>
+              </div>
+              <div class="row" style="grid-column:1 / -1; display:flex; gap:10px; justify-content:flex-end">
+                <button class="btn" type="reset">Limpiar</button>
+                <button class="btn primary" type="submit">Enviar</button>
+              </div>
+            </form>
+          </div>
+          <div class="card">
+            <h2>Histórico</h2>
+            <ul id="notifyLog" class="muted" style="margin:0; padding-left:18px"></ul>
+          </div>
+        </section>
+        <!-- PAGOS -->
+<section id="pagos" hidden aria-labelledby="pagos-title">
+  <div class="card">
+    <h2 id="pagos-title">Pagos de Mensualidad</h2>
+
+    <!-- Formulario -->
+    <form class="form two" id="pagoForm" novalidate>
+      <div class="row">
+        <label>Estudiante
+          <select name="estudiante" required>
+            
+          </select>
+        </label>
+      </div>
+
+      <div class="row">
+        <label>Asignatura
+          <select name="asignatura" required>
+            <option value="">Seleccione…</option>
+            
+          </select>
+        </label>
+      </div>
+
+      <div class="row">
+        <label>Valor Mensual
+          <input class="input" type="number" name="valor" placeholder="Ej: 150000" required />
+        </label>
+      </div>
+
+      <div class="row">
+        <label>Fecha de Pago
+          <input class="input" type="date" name="fecha" required />
+        </label>
+      </div>
+
+      <div class="row">
+        <label>Estado
+          <select name="estado" required>
+            <option value="pendiente">Pendiente</option>
+            <option value="pagado">Pagado</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row" style="grid-column:1/-1; display:flex; gap:10px; justify-content:flex-end">
+        <button class="btn" type="reset">Limpiar</button>
+        <button class="btn primary" type="submit">Registrar Pago</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3>Historial de Pagos</h3>
+    <table class="table" id="tablaPagos">
+      <thead>
+        <tr>
+          <th>Estudiante</th>
+          <th>Asignatura</th>
+          <th>Valor</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+
+        <!-- SEGURIDAD -->
+        <section id="seguridad" hidden aria-labelledby="sec-title">
+          <div class="card">
+            <h2 id="sec-title">Seguridad y accesos</h2>
+            <ul class="muted" style="margin:0; padding-left:18px">
+              <li>Perfiles: Administrador, Docente, Estudiante</li>
+              <li>Buenas prácticas: contraseñas cifradas, 2FA, control de sesiones, mínimo privilegio.</li>
+              <li>Auditoría: trazabilidad de acciones y cambios.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL NUEVO ESTUDIANTE -->
+ <dialog class="modal" id="studentModal" aria-labelledby="modalTitle">
+  <div class="panel" role="document">
+    <header>
+      <h3 id="modalTitle" style="margin:0">Nuevo estudiante</h3>
+    </header>
+    <div class="body">
+      <form class="form two" id="studentForm" action="insertar_estudiante.php" method="POST" novalidate>
+        <div class="row">
+          <label>Documento
+            <input class="input" name="doc" required pattern="\d{6,12}" placeholder="Solo números (6-12)" />
+          </label>
+        </div>
+        <div class="row">
+          <label>Nombre completo
+            <input class="input" name="name" required minlength="3" />
+          </label>
+        </div>
+        <div class="row">
+          <label>Teléfono
+            <input class="input" name="phone" required pattern="\d{7,12}" placeholder="Ej: 3100000000" />
+          </label>
+        </div>
+        <div class="row">
+          <label>Curso
+            <input class="input" name="course" required />
+          </label>
+        </div>
+        <div class="row" style="grid-column:1 / -1; display:flex; gap:10px; justify-content:flex-end">
+          <button class="btn" type="button" id="closeModal">Cancelar</button>
+          <button class="btn primary" type="submit">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Acción realizada.</div>
+  <footer>
+    <p>@ Darwin Lucumi 2025</p>
+  </footer>
+ 
+
+
+  
+
+<script>
+  const sel = document.querySelector('select[name="to"]');
+  const rowStudent = document.getElementById('row-student');
+  const student = rowStudent.querySelector('input[name="student"]');
+  const form = document.getElementById('notifyForm');
+
+  function toggleStudent() {
+    const one = sel.value === 'one';
+    rowStudent.hidden = !one;
+    student.required = one;
+    if (!one) student.value = '';
+  }
+
+  sel.addEventListener('change', toggleStudent);
+  toggleStudent(); // inicializa según la selección actual
+
+  // Por ahora solo prevenimos envío y mostramos los datos
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form));
+    console.log('Datos listos para enviar:', data);
+    alert('Simulación: datos listos para backend.\nMira la consola del navegador.');
+    // 🔹 Mensaje cuando se limpia el formulario de pagos
+const pagoForm = document.getElementById('pagoForm');
+if (pagoForm) {
+  pagoForm.addEventListener('reset', () => {
+    const toast = document.getElementById('toast');
+    toast.textContent = 'Formulario limpiado, los pagos anteriores se mantienen.';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  });
+}
+
+  });
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>
