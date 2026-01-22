@@ -51,6 +51,8 @@ Permite gestionar estudiantes, cursos (asignaturas), solicitudes y citas, con un
 - MySQL
 
 ---
+🚧 Pendiente: módulo de recuperación de contraseña
+
 
 👤 Autor
 
